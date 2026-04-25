@@ -13,9 +13,14 @@ for supply in /sys/class/power_supply/*/online; do
 done
 
 if [ "$ac_online" = "1" ]; then
-    system76-power profile performance > /dev/null 2>&1
+    target="performance"
 else
-    system76-power profile balanced > /dev/null 2>&1
+    target="balanced"
 fi
+
+for i in 1 2 3; do
+    system76-power profile "$target" > /dev/null 2>&1 || true
+    [ "$i" -lt 3 ] && sleep 2
+done
 
 [ -n "$brightness" ] && echo "$brightness" > "$backlight" 2>/dev/null || true

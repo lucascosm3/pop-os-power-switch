@@ -1,9 +1,10 @@
 [Unit]
 Description=Set power profile based on AC status
-After=multi-user.target
+After=multi-user.target com.system76.PowerDaemon.service graphical.target
 
 [Service]
 Type=oneshot
+ExecStartPre=/bin/sleep 5
 ExecStart=/usr/local/bin/power-profile-switch.sh
 
 [Install]
