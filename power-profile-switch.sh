@@ -2,7 +2,13 @@
 set -euo pipefail
 
 backlight="/sys/class/backlight/intel_backlight/brightness"
-brightness=$(cat "$backlight") 2>/dev/null || true
+saved_brightness="/var/lib/systemd/backlight/pci-0000:00:02.0:backlight:intel_backlight"
+
+if [ -f "$saved_brightness" ]; then
+    brightness=$(cat "$saved_brightness")
+elif [ -f "$backlight" ]; then
+    brightness=$(cat "$backlight")
+fi
 
 ac_online=0
 for supply in /sys/class/power_supply/*/online; do
