@@ -5,14 +5,22 @@ echo "Removendo power-profile-switch..."
 
 systemctl stop power-profile-switch.service 2>/dev/null || true
 systemctl stop power-profile-switch-resume.service 2>/dev/null || true
+systemctl stop power-profile-switch-late.timer 2>/dev/null || true
+systemctl stop brightness-save.timer 2>/dev/null || true
 systemctl stop brightness-watcher.service 2>/dev/null || true
 
 systemctl disable power-profile-switch.service 2>/dev/null || true
 systemctl disable power-profile-switch-resume.service 2>/dev/null || true
+systemctl disable power-profile-switch-late.timer 2>/dev/null || true
+systemctl disable brightness-save.timer 2>/dev/null || true
 systemctl disable brightness-watcher.service 2>/dev/null || true
 
 rm -f /etc/systemd/system/power-profile-switch.service
 rm -f /etc/systemd/system/power-profile-switch-resume.service
+rm -f /etc/systemd/system/power-profile-switch-late.service
+rm -f /etc/systemd/system/power-profile-switch-late.timer
+rm -f /etc/systemd/system/brightness-save.service
+rm -f /etc/systemd/system/brightness-save.timer
 rm -f /etc/systemd/system/brightness-watcher.service
 systemctl daemon-reload
 
@@ -20,6 +28,7 @@ rm -f /etc/udev/rules.d/99-power-profile.rules
 udevadm control --reload-rules
 
 rm -f /usr/local/bin/power-profile-switch.sh
+rm -f /usr/local/bin/brightness-save.sh
 rm -f /usr/local/bin/brightness-watcher.sh
 
 rm -rf /var/lib/power-profile-switch

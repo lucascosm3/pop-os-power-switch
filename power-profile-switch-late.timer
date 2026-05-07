@@ -1,0 +1,9 @@
+[Unit]
+Description=Run late power profile correction after boot
+
+[Timer]
+OnBootSec=90s
+AccuracySec=5s
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=Save current brightness preference
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/brightness-save.sh

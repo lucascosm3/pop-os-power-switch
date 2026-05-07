@@ -1,0 +1,8 @@
+[Unit]
+Description=Late power profile correction after desktop session
+After=multi-user.target com.system76.PowerDaemon.service graphical.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 90
+ExecStart=/usr/local/bin/power-profile-switch.sh --prefer-saved
