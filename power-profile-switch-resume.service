@@ -1,9 +1,10 @@
 [Unit]
-Description=Restore brightness after suspend/resume
-After=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
+Description=Restore power profile and brightness after suspend/resume
+After=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target systemd-backlight@backlight:intel_backlight.service
 
 [Service]
 Type=oneshot
+ExecStartPre=/bin/sleep 5
 ExecStart=/usr/local/bin/power-profile-switch.sh
 
 [Install]

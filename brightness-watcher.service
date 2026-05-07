@@ -1,0 +1,12 @@
+[Unit]
+Description=Watch brightness changes and persist user preference
+After=multi-user.target graphical.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/brightness-watcher.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
